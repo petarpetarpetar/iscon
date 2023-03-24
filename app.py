@@ -12,13 +12,14 @@ from flask_jwt_extended import (
     jwt_required,
     JWTManager,
     set_access_cookies,
-    unset_jwt_cookies,
+    unset_jwt_cookies
 )
 from flask_cors import CORS
 
-
 import views
 from db import db
+from models.student import Stundet
+from models.paymentSlip import PaymentSlip
 
 app = Flask(__name__)
 

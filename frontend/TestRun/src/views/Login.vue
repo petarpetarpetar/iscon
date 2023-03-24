@@ -1,3 +1,3 @@
-<template>Login</template>
+<template></template>
 
 <script setup></script>
