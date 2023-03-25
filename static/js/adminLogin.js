@@ -8,14 +8,14 @@ function onClickLoginHandler() {
     if (this.readyState === this.DONE) {
       console.log(this.responseText);
       if (this.status === 200) {
-        location.replace(`/studentProfil`);
+        location.replace(`/adminLogin`);
       } else if (this.status === 401) {
         alert(JSON.parse(this.response)["message"]);
       }
     }
   });
 
-  xhr.open("POST", `/login`);
+  xhr.open("POST", `/adminLogin`);
   xhr.setRequestHeader("Content-Type", "application/json");
   data = JSON.stringify({
     id: id,
@@ -33,14 +33,14 @@ function logout() {
     if (this.readyState === this.DONE) {
       console.log(this.responseText);
       if (this.status === 200) {
-        location.replace(`/loginPage`);
+        location.replace(`/adminProfile`);
       } else if (this.status === 401) {
         alert(JSON.parse(this.response)["message"]);
       }
     }
   });
 
-  xhr.open("DELETE", `/login`);
+  xhr.open("DELETE", `/adminLogin`);
   xhr.setRequestHeader("Content-Type", "application/json");
 
   xhr.send();

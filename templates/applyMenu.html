@@ -15,6 +15,14 @@
       crossorigin="anonymous"
     ></script>
 
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+
     <!-- jQuery -->
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
@@ -26,11 +34,11 @@
   </head>
   <body>
     {% include 'navbar.html' %}
-    <div class="container py-5">
+    <div class="container py-5 shadow p-3 mb-5 bg-white rounded">
       <div class="d-flex justify-content-center py5">
         <h1>УПИС НАРЕДНОГ СЕМЕСТРА</h1>
       </div>
-      <div class="card my-5">
+      <div class="card my-5 shadow p-3">
         <div class="d-flex flew-rows justify-content-between">
           <div class="p-4">
             <h3 class="card-text text-primary">
@@ -47,7 +55,7 @@
           </div>
         </div>
       </div>
-      <div class="card my-5">
+      <div class="card my-5 shadow p-3 mb-5 bg-white rounded">
         <div class="d-flex flew-rows justify-content-between">
           <div class="p-4">
             <h3 class="card-text text-primary">СЕМЕСТРАЛНИ ЛИСТ</h3>
@@ -62,7 +70,10 @@
           </div>
         </div>
       </div>
-      <div class="card my-5" href="/courseList">
+      <div
+        class="card my-5 shadow p-3 mb-5 bg-white rounded"
+        href="/courseList"
+      >
         <div class="d-flex flew-rows justify-content-between">
           <div class="p-4">
             <h3 class="card-text text-primary">ПРИЈАВНИ СЕМЕСТРАЛНИ ЛИСТ</h3>
@@ -78,10 +89,22 @@
         </div>
       </div>
       <div style="text-align: center">
-        <button type="submit" class="btn btn-primary my-2">
+        <div
+          id="btn_finalize"
+          class="mt-5 btn btn-primary btn-lg btn-block my-2"
+        >
           Поднеси захтев
-        </button>
+        </div>
       </div>
     </div>
   </body>
 </html>
+
+<style>
+  * {
+    color: rgb(128, 145, 160);
+  }
+  body {
+    font-family: "Rubik", sans-serif;
+  }
+</style>

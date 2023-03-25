@@ -16,7 +16,9 @@ class StudentResource(Resource):
     parser.add_argument("telefon", type=str, required=True, help="This field cannot be blank.")
     parser.add_argument("adresa", type=str, required=True, help="This field cannot be blank.")
     parser.add_argument("password", type=str, required=True, help="This field cannot be blank.")   
-    parser.add_argument("studijskiProgram", type=str, required=True, help="This field cannot be blank.")  
+    parser.add_argument("studijskiProgram", type=str, required=True, help="This field cannot be blank.") 
+    parser.add_argument("smer", type=str, required=True, help="This field cannot be blank.") 
+    
 
     @jwt_required()
     def get(self):
@@ -34,11 +36,12 @@ class StudentResource(Resource):
         email = data["email"]
         password = data['password']
         studijskiProgram = data['studijskiProgram']
+        smer = data['smer']
         
-        student = Student(password, ime, prezime, jmbg, indeks, studijskiProgram,telefon, email, adresa) 
+        student = Student(password, ime, prezime, jmbg, indeks, studijskiProgram,telefon, email, adresa, smer) 
         student.save_to_db()
 
-        return {"Message": f"Created, id: {student.id}"}, 200
+        return {"message": f"Created, id: {student.id}"}, 200
     
 class StudentsListResource(Resource):
     
@@ -46,7 +49,7 @@ class StudentsListResource(Resource):
     def get(self):
         claims = get_jwt()
         if not claims['admin']:
-            return {"Message": "Not an admin"}, 401
+            return {"message": "Not an admin"}, 401
         students =  [x.as_dict() for x in Student.find_all()]
         for s in students:
             s['password'] = ""
@@ -65,7 +68,7 @@ class StudentLoginResource(Resource):
         userinfo = Student.find_by_id(data['id'])
 
         if userinfo is None:
-            return {"Message": "Error: User does not exist"}, 401
+            return {"message": "Error: User does not exist"}, 401
 
         if bcrypt.checkpw(data["password"].encode("utf8"), userinfo.password):
             additional_claims = {"admin": False}
@@ -79,7 +82,7 @@ class StudentLoginResource(Resource):
 
             return resp
         
-        return {"Message": "Error: Password incorrect"}, 401
+        return {"message": "Error: Password incorrect"}, 401
     
     @jwt_required(fresh=False)
     def delete(self): # logout

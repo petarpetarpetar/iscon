@@ -111,39 +111,29 @@ function changeHandler() {
 }
 
 function submitButtonHandler() {
-  var racunPrimaoca = document.getElementById("racunPrimaoca").value;
-  var razlogPlacanja =
-    document.getElementById("valueselect").options[
-      document.getElementById("valueselect").selectedIndex
-    ].text;
-  var kolicinaNovca = document.getElementById("valueselect").value;
-  var samofinansiranje = false;
-  if (document.getElementById("samofinansiranje").checked) {
-    samofinansiranje = true;
-  }
+  var racunPrimaoca = $("#primalac").val();
+  var razlogPlacanja = $("#valueselect").find(":selected").text();
+  var kolicinaNovca = $("#moneyamount").val();
+  var vrstaPrihoda = $("#vrsta-prihoda").val();
+  var opstina = $("#opstina").val();
+  var bOrganizacija = $("#moneyamount").val();
+  var pozivNaBroj = $("#poziv-na-broj").val();
 
-  const xhr = new XMLHttpRequest();
-  alert([racunPrimaoca, razlogPlacanja, kolicinaNovca, samofinansiranje]);
-  //   xhr.addEventListener("readystatechange", function () {
-  //     if (this.readyState === this.DONE) {
-  //       console.log(this.responseText);
-  //       if (this.status === 200) {
-  //         location.replace(`/studentProfil`);
-  //       } else if (this.status === 401) {
-  //         alert(JSON.parse(this.response)["Message"]);
-  //       }
-  //     }
-  //   });
-
-  xhr.open("POST", `/paymentSlip`);
-  xhr.setRequestHeader("Content-Type", "application/json");
   data = JSON.stringify({
     racunPrimaoca: racunPrimaoca,
     svrhaUplate: razlogPlacanja,
     kolicinaNovca: kolicinaNovca,
-    samofinansiranje: samofinansiranje,
+    vrstaPrihoda: vrstaPrihoda,
+    opstina: opstina,
+    bOrganizacija: bOrganizacija,
+    pozivNaBroj: pozivNaBroj,
   });
 
+  console.log(data);
+
+  const xhr = new XMLHttpRequest();
+  xhr.open("POST", `/paymentSlip`);
+  xhr.setRequestHeader("Content-Type", "application/json");
+
   xhr.send(data);
-  //   // location.href = 'http://192.168.137.80:5000/login'
 }

@@ -16,11 +16,13 @@ from flask_jwt_extended import (
 )
 from flask_cors import CORS
 
+
 import views
 from db import db
 from resources.paymentSlipRes import PaymentSlipResource
 from resources.studentRes import StudentResource, StudentsListResource, StudentLoginResource
 from resources.adminRes import AdminLoginResource, AdminResource
+from resources.paypalRes import PaypalCreatePayment, PaypalExecutePayment
 app = Flask(__name__)
 
 
@@ -51,12 +53,21 @@ app.add_url_rule("/dodavanjeSredstava", view_func=views.dodavanjeSredstava)
 app.add_url_rule("/applyList", view_func=views.applyList)
 app.add_url_rule("/transaction", view_func=views.transactionPage)
 app.add_url_rule("/applyMenu", view_func=views.applyMenu)
+app.add_url_rule("/adminProfile", view_func=views.adminProfile)
+app.add_url_rule("/imageUpload", methods=['POST'], view_func=views.upload)
+app.add_url_rule("/nextSemester", methods=['POST'], view_func=views.semestar)
+app.add_url_rule("/registerStudent", view_func=views.registerStudent)
+app.add_url_rule("/studentList", view_func=views.studentList)
 
 api.add_resource(PaymentSlipResource, "/paymentSlip")
+
+api.add_resource(PaypalCreatePayment, "/payment/paypal/create/<amount>")
+api.add_resource(PaypalExecutePayment, "/payment/paypal/execute")
 
 api.add_resource(StudentResource, "/student")
 api.add_resource(StudentsListResource, "/studentsList")
 api.add_resource(StudentLoginResource, "/login")
+
 
 api.add_resource(AdminLoginResource, "/adminLogin")
 api.add_resource(AdminResource, "/admin")

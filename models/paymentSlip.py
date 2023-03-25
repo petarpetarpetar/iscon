@@ -12,15 +12,18 @@ class PaymentSlip(db.Model):
     bOrganizacija = db.Column(db.String(100))
     racunPrimaoca = db.Column(db.String(50))
     pozivNaBroj = db.Column(db.String(100))
-    
+    vrstaPrihoda = db.Column(db.String(30))
+    kolicinaNovca = db.Column(db.Float)
 
 
-    def __init__(self, student, svrhauplate, opstina, bOrganizacija, pozivNaBroj): 
+    def __init__(self, student, svrhauplate, opstina, bOrganizacija, racunPrimaoca, pozivNaBroj, vrsaPrihoda, kolicinaNovca): 
         self.svrhauplate = svrhauplate 
         self.opstina = opstina 
         self.bOrganizacija = bOrganizacija 
         self.pozivNaBroj = pozivNaBroj
-
+        self.racunPrimaoca = racunPrimaoca
+        self.vrstaPrihoda = vrsaPrihoda
+        self.kolicinaNovca = kolicinaNovca
         self.student = student
     
     def save_to_db(self):
@@ -31,3 +34,6 @@ class PaymentSlip(db.Model):
     def find_by(cls, key, value):
         return cls.query.filter_by(key=value).first()
 
+    @classmethod
+    def find_all(cls):
+        return cls.query.all()

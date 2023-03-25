@@ -9,6 +9,10 @@
     <!-- jQuery -->
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
+
+    <!-- applyList js -->
+    <script src="{{ url_for('static', filename='js/applyList.js') }}"></script>
+
     <!-- Logout -->
     <script src="{{ url_for('static', filename='js/login.js') }}"></script>
   </head>
@@ -27,29 +31,31 @@
             <div class="form-group row mx-auto my-3">
                 <label for="dosije-broj" class="col-sm-3 col-form-label"> Број уписнице (индекса) </label>
                 <div class="col-sm-2">
-                    <input type="text" id="dosije-broj" class="form-control">  </input>
+                    <input type="text" value="{{student.indeks}}" id="dosije-broj" class="form-control">  </input>
                 </div>
             </div>
             <div class="form-group row mx-auto my-3">
-                <div class="inline">
-                    <label for="student" class="col-sm-1 col-form-label"> Студент </label>
+                <div class="d-flex flex-rows justify-content-start">
+                <div class="p-1 flex-fill">
+                    <label for="student" class="p-1 col-form-label"> Студент </label>
                 </div>
-                <div class="col-sm-3 inline">
-                    <input type="text" id="student" class= "form-control">  </input>
+                <div class="p-1 flex-fill">
+                    <input type="text" value="{{student.ime}} {{student.prezime}}" id="student" class= "form-control">  </input>
                 </div>
-                <div class="inline">
+                <div class="p-1 flex-fill">
                     <label>уписао-ла се као</label>
                 </div>
-                <div class="inline">
+                <div class="p-1flex-fill mx-3">
                     <select class="form-select px-2 mx-2"aria-label="redovan">
                         <option>редован</option>
                         <option>ванредан</option>
                     </select>
                 </div>
-                <div class="inline">
+                <div class="p-1 flex-fill">
                     студент у
-                </div> 
-                <div>
+                </div>
+             
+                <div class="p-1 flex-fill mx-2">
                     <select class="form-select px-2 mx-2" aria-label="naziv-predmeta2">
                         <option selected disabled>семестар-године</option>
                         <option value="1">1.</option>
@@ -62,41 +68,43 @@
                         <option value="8">8.</option>
                     </select>
                 </div>
-                <div class="inline">
+                <div class="p-1 flex-fill">
                     <label> семестар-године </label>
+                </div></div> 
+                <div class="col-sm-6 mx-2 my-2">
+                    <input type="text" value="{{ student.smer }}" id="smer" class="form-control">  </input>
                 </div>
-                <div class="inline mx-2 my-2">
-                    <input type="text" id="smer" class="form-control">  </input>
-                </div>
-                <div class="inline my-2">
+                <div class="col-sm-3 my-2">
                     одсјек-смјер-група.
                 </div>  
             </div>
             <div class="form-group row mx-auto my-3">
                 <label for="datum" class="col-sm-2 col-form-label">Датум рођења</label>
-                <div>
+                <div class="col-sm-2">
                 <input type="date" id="datum" class="form-control">  </input>
                 </div>
             </div>
             <div class="form-group row mx-auto my-3">
-                <div class="col-sm-2 inline">
+                <div class="d-flex flex-rows">
+                <div class="flex-fill">
                     <label for="mesto-rodjenja" class="col-form-label"> Мјесто рођења </label>
                 </div>
-                <div class="col-sm-2 inline">
+                <div class="flex-fill mx-2">
                     <input type="text" id="mjesto" class= "form-control">  </input>
                 </div>
-                <div class="inline">
+                <div class="flex-fill">
                     <label for="opstina" class="col-form-label"> , општина</label>
                 </div>
-                <div class="col-sm-2 inline">
+                <div class=" flex-fill mx-2">
                     <input type="text" id="opstina" class= "form-control">  </input>
                 </div>
-                <div class="inline">
+                <div class="flex-fill">
                     <label for="drzava" class="col-form-label"> , држава</label>
                 </div>
-                <div class="col-sm-2 inline">
+                <div class="flex-fill mx-2">
                     <input type="text" id="drzava" class= "form-control">  </input>
                 </div>
+            </div>
             </div>
             <div class="form-group row mx-auto my-3">
                 <div class="col-sm-2 inline">
@@ -107,18 +115,20 @@
                 </div>
             </div>
             <div class="form-group row mx-auto my-3">
-                <div class="col-sm-2 inline">
+                <div class="d-flex flex-rows justify-content-start">
+                <div class="flex-fill">
                     <label for="narodnost" class="col-form-label"> Народност </label>
                 </div>
-                <div class="col-sm-2 inline">
+                <div class="flex-fill">
                     <input type="text" id="narodnost" class= "form-control">  </input>
                 </div>
-                <div class="inline">
+                <div class="flex-fille">
                     <label for="bracno-stanje" class="col-form-label"> , брачно стање</label>
                 </div>
-                <div class="col-sm-2 inline">
+                <div class="flex-fill">
                     <input type="text" id="bracno-stanje" class= "form-control">  </input>
                 </div>
+            </div>
             </div>
             <div class="form-group row mx-auto my-3">
                 <div class="col-sm-3 inline">
@@ -178,7 +188,7 @@
             </div>
             <submit>
             <div style="text-align: right">
-                    <button type="submit" class="btn btn-primary my-2">Следећи лист</button>
+                    <div id="btn_save_page3" class="btn btn-primary my-2">Следећи лист</div>
             </div>
         </form>
     </div>

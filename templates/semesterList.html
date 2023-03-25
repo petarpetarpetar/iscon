@@ -9,6 +9,9 @@
     <!-- jQuery -->
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
+    <!-- Semester List -->
+    <script src="{{ url_for('static', filename='js/semesterList.js') }}"></script>
+
     <!-- Logout -->
     <script src="{{ url_for('static', filename='js/login.js') }}"></script>
     </head>
@@ -20,25 +23,25 @@
             <div class="form-group row mx-auto my-3">            
                 <label for="fakultet" class="col-sm-2 col-form-label"> Факултет </label>
                 <div class="col-sm-5">
-                    <input type="text" id="fakultet" class="form-control">  </input>
+                    <input type="text" value="Eelektrotehnicki fakultet u Banjoj Luci" id="fakultet" class="form-control">  </input>
                 </div>
             </div>
             <div class="form-group row mx-auto my-3">
                 <label for="dosije-broj" class="col-sm-2 col-form-label"> Досије број </label>
                 <div class="col-sm-2">
-                    <input type="text" id="dosije-broj" class="form-control">  </input>
+                    <input type="text" value="1739-261/23" id="dosije-broj" class="form-control">  </input>
                 </div>
             </div>
             <div class="form-group row mx-auto my-3">
                 <label for="semestar-godina" class="col-sm-2 col-form-label"> Семестар - година </label>
                 <div class="col-sm-3">
-                    <input type="text" id="semestar-godina" class="form-control"> </input>
+                    <input type="text" value="{{ student.semestar }}. semestar" id="semestar-godina" class="form-control"> </input>
                 </div>
             </div>
             <div class="form-group row mx-auto my-3">   
                 <label for="ime-i-prezime-studenta" class="col-sm-2 col-form-label"> Име и презиме студента </label>
                 <div class="col-sm-5">
-                    <input type="text" id="ime-i-prezime-studenta" class="form-control">  </input>
+                    <input type="text" value="{{ student.ime }} {{ student.prezime }}" id="ime-i-prezime-studenta" class="form-control">  </input>
                 </div>
             </div>
             <div class="form-group row mx-auto my-3">          
@@ -50,19 +53,19 @@
             <div class="form-group row mx-auto my-3">
                 <label for="opstina" class="col-sm-2 col-form-label"> Општина </label>
                 <div class="col-sm-2">
-                    <input type="text" id="opstina" class="form-control"> </input>
+                    <input type="text" value="002" id="opstina" class="form-control"> </input>
                 </div>
             </div>
             <div class="form-group row mx-auto my-3">
                 <label for="drzava" class="col-sm-2 col-form-label" class="form-control"> Држава </label>
                 <div class="col-sm-2">
-                    <input type="text" id="drzava" class="form-control"> </input>
+                    <input type="text" value="Bosna i Hercegovina" id="drzava" class="form-control"> </input>
                 </div>
             </div>
             <div class="form-group row mx-auto my-3">
                 <label for="drzavljanin" class="col-sm-2 col-form-label" class="form-control"> Држављанин </label>
                 <div class="col-sm-2">
-                    <input type="text" id="drzavljanin" class="form-control"> </input>
+                    <input type="text" value="Srbije i Republike Srpske" id="drzavljanin" class="form-control"> </input>
                 </div>
             </div>
             <div class="form-group row mx-auto my-3">
@@ -72,22 +75,31 @@
                 </div>
             </div>
             <div class="form-group row mx-auto my-3">
+                <div class="d-flex flex-rows justify-content-start">
+                <div class="p-1">
                 <label for="godina-semestra-1"> Слушао је у зимском - љетњем семестру 20</label>
-                <div class="col-sm-1 inline">
+                </div>
+                <div class="p-1 flex-fill">
                     <input type="text" id="godina-semestra-1" class="form-control"> </input>
                 </div>
-                <div class="inline">
+                <div class="p-1 flex-fill">
                     <label for="godina-semestra-2">/</label>
                 </div>
-                <div class="col-sm-1 inline">
+                <div class="p-1 flex-fill">
                     <input type="text" id="godina-semestra-2" class="form-control"> </input> 
                 </div>
+                <div class="p-1 flex-fill">
                 <label> школске године као </label>
-                <select class="form-select px-2 mx-2"aria-label="redovan">
+                </div>
+                <div class="p-1 flex-fill">
+                <select class="form-select px-2 mx-2 col-lg-2"aria-label="redovan">
                     <option>редован</option>
                     <option>ванредан</option>
                 </select>
-                <label> студент. </label>
+            </div>
+            <div class="p-1 flex-fill" style="margin-left: 1rem;"> студент.
+            </div>
+            </div>
             </div>
             <table  style="text-align: center;" class="table table-striped">
                 <thead style="background-color: hsl(205, 78%, 56%)">
@@ -101,15 +113,10 @@
                 <tr>
                     <td>
                         <select id="predmet-select-1" class="form-select px-2" aria-label="naziv-predmeta1">
-                            <option selected>Изаберите предмет</option>
-                            <option value="1">1.</option>
-                            <option value="2">2.</option>
-                            <option value="3">3.</option>
-                            <option value="4">4.</option>
-                            <option value="5">5.</option>
-                            <option value="6">6.</option>
-                            <option value="7">7.</option>
-                            <option value="8">8.</option>
+                            <option selected disabled>Изаберите предмет</option>
+                            {% for key,value in temp.items() %}
+                            <option>{{key}}</option>
+                            {% endfor%}
                         </select>
                     </td>
                     <td><input type="text" name="ime-i-prezime-nastavnika1"></td>
@@ -120,14 +127,9 @@
                     <td>
                         <select id="predmet-select-2" class="form-select px-2" aria-label="naziv-predmeta2">
                             <option selected>Изаберите предмет</option>
-                            <option value="1">1.</option>
-                            <option value="2">2.</option>
-                            <option value="3">3.</option>
-                            <option value="4">4.</option>
-                            <option value="5">5.</option>
-                            <option value="6">6.</option>
-                            <option value="7">7.</option>
-                            <option value="8">8.</option>
+                            {% for key,value in temp.items() %}
+                            <option>{{key}}</option>
+                            {% endfor%}
                         </select>
                     </td>
                     <td><input type="text" name="ime-i-prezime-nastavnika2"></td>
@@ -138,14 +140,9 @@
                     <td>
                         <select id="predmet-select-3" class="form-select px-2" aria-label="naziv-predmeta3">
                             <option selected>Изаберите предмет</option>
-                            <option value="1">1.</option>
-                            <option value="2">2.</option>
-                            <option value="3">3.</option>
-                            <option value="4">4.</option>
-                            <option value="5">5.</option>
-                            <option value="6">6.</option>
-                            <option value="7">7.</option>
-                            <option value="8">8.</option>
+                            {% for key,value in temp.items() %}
+                            <option>{{key}}</option>
+                            {% endfor%}
                         </select>
                     </td>
                     <td><input type="text" name="ime-i-prezime-nastavnika3"></td>
@@ -156,14 +153,9 @@
                     <td>
                         <select id="predmet-select-4" class="form-select px-2" aria-label="naziv-predmeta4">
                             <option selected>Изаберите предмет</option>
-                            <option value="1">1.</option>
-                            <option value="2">2.</option>
-                            <option value="3">3.</option>
-                            <option value="4">4.</option>
-                            <option value="5">5.</option>
-                            <option value="6">6.</option>
-                            <option value="7">7.</option>
-                            <option value="8">8.</option>
+                            {% for key,value in temp.items() %}
+                            <option>{{key}}</option>
+                            {% endfor%}
                         </select>
                     </td>
                     <td><input type="text" name="ime-i-prezime-nastavnika4"></td>
@@ -174,14 +166,9 @@
                     <td>
                         <select id="predmet-select-5" class="form-select px-2" aria-label="naziv-predmeta5">
                             <option selected>Изаберите предмет</option>
-                            <option value="1">1.</option>
-                            <option value="2">2.</option>
-                            <option value="3">3.</option>
-                            <option value="4">4.</option>
-                            <option value="5">5.</option>
-                            <option value="6">6.</option>
-                            <option value="7">7.</option>
-                            <option value="8">8.</option>
+                            {% for key,value in temp.items() %}
+                            <option>{{key}}</option>
+                            {% endfor%}
                         </select>
                     </td>
                     <td><input type="text" name="ime-i-prezime-nastavnika5"></td>
@@ -192,14 +179,9 @@
                     <td>
                         <select id="predmet-select-6" class="form-select px-2" aria-label="naziv-predmeta6">
                             <option selected>Изаберите предмет</option>
-                            <option value="1">1.</option>
-                            <option value="2">2.</option>
-                            <option value="3">3.</option>
-                            <option value="4">4.</option>
-                            <option value="5">5.</option>
-                            <option value="6">6.</option>
-                            <option value="7">7.</option>
-                            <option value="8">8.</option>
+                            {% for key,value in temp.items() %}
+                            <option>{{key}}</option>
+                            {% endfor%}
                         </select>
                     </td>
                     <td><input type="text" name="ime-i-prezime-nastavnika6"></td>
@@ -210,14 +192,9 @@
                     <td>
                         <select id="predmet-select-7" class="form-select px-2" aria-label="naziv-predmeta7">
                             <option selected>Изаберите предмет</option>
-                            <option value="1">1.</option>
-                            <option value="2">2.</option>
-                            <option value="3">3.</option>
-                            <option value="4">4.</option>
-                            <option value="5">5.</option>
-                            <option value="6">6.</option>
-                            <option value="7">7.</option>
-                            <option value="8">8.</option>
+                            {% for key,value in temp.items() %}
+                            <option>{{key}}</option>
+                            {% endfor%}
                         </select>
                     </td>
                     <td><input type="text" name="ime-i-prezime-nastavnika7"></td>
@@ -228,14 +205,9 @@
                     <td>
                         <select id="predmet-select-8" class="form-select px-2" aria-label="naziv-predmeta8">
                             <option selected>Изаберите предмет</option>
-                            <option value="1">1.</option>
-                            <option value="2">2.</option>
-                            <option value="3">3.</option>
-                            <option value="4">4.</option>
-                            <option value="5">5.</option>
-                            <option value="6">6.</option>
-                            <option value="7">7.</option>
-                            <option value="8">8.</option>
+                            {% for key,value in temp.items() %}
+                            <option>{{key}}</option>
+                            {% endfor%}
                         </select>
                     </td>
                     <td><input type="text" name="ime-i-prezime-nastavnika7"></td>
@@ -244,7 +216,7 @@
                 </tr>
               </table>
               <div style="text-align: right">
-                <button type="submit" class="btn btn-primary my-2">Следећи лист</button>
+                <div id="btn_save_page2" class="btn btn-primary my-2">Следећи лист</div>
               </div>
         </form>
     </div>

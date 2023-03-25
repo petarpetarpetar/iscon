@@ -1,0 +1,119 @@
+<html lang="sr">
+  <meta charset="UTF-8" />
+  <head>
+    <!-- bootstrap -->
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- jQuery -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- Apply Menu -->
+    <script src="{{ url_for('static', filename='js/applyMenu.js') }}"></script>
+
+    <!-- Logout -->
+    <script src="{{ url_for('static', filename='js/login.js') }}"></script>
+
+    <script src="{{ url_for('static', filename='js/adminProfile.js') }}"></script>
+  </head>
+  <body>
+    {% include 'navbarAdmin.html' %}
+    <div class="container py-5">
+      <div class="d-flex flex-row justify-content-between">
+        <div class="card col-sm-4">
+          <div class="card-body">
+            <h3 class="card-title" style="text-align: center">
+              Уплата школарине
+            </h3>
+            <canvas id="doughnut"></canvas>
+          </div>
+        </div>
+        <div class="card col-sm-7">
+          <div class="card-body">
+            <h3 class="card-title" style="text-align: center">
+              Број студената по усмерењу
+            </h3>
+            <canvas id="bar"></canvas>
+          </div>
+        </div>
+      </div>
+      <div class="card col-sm-4 my-5">
+        <div class="card-body">
+          <h3 class="card-title" style="text-align: center">
+            Преглед финансијског стања
+          </h3>
+          <h3 class="card-text text-primary" style="text-align: center">
+            3266.00 BAM
+          </h3>
+        </div>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+      const dgt = document.getElementById("doughnut");
+      const bar = document.getElementById("bar");
+
+      new Chart(dgt, {
+        type: "doughnut",
+        data: {
+          labels: ["Плаћена школарина", "Неплаћена школарина"],
+          datasets: [
+            {
+              label: "Студената",
+              data: [5, 2],
+              backgroundColor: ["rgb(0, 128, 43)", "rgb(179, 0, 0)"],
+              hoverOffset: 4,
+            },
+          ],
+        },
+      });
+      new Chart(bar, {
+        type: "bar",
+        data: {
+          labels: [
+            "Рачунарство и информатика",
+            "Електроника и телекомуникације",
+            "Електроенергетика и аутоматика",
+          ],
+          datasets: [
+            {
+              label: "Студената",
+              data: [5, 2, 7],
+              backgroundColor: [
+                "rgb(51, 51, 255)",
+                "rgb(0, 230, 230)",
+                "rgb(71, 71, 209)",
+              ],
+            },
+          ],
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true,
+            },
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

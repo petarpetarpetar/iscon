@@ -22,7 +22,7 @@ paypal.Button.render(
     // Set up the payment:
     // 1. Add a payment callback
     payment: function (data, actions) {
-      amount = $(`#paypal-topup`).val();
+      amount = $(`#Amount`).val();
       // 2. Make a request to your server
       return actions.request
         .post(`${CREATE_PAYMENT_URL}${amount}`)

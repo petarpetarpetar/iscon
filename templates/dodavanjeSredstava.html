@@ -1,6 +1,9 @@
 <html lang="sr">
   <meta charset="UTF-8" />
   <head>
+    <!-- axios -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
     <!-- bootstrap -->
 
     <link
@@ -19,7 +22,6 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
     <!-- Paypal -->
-    <script src="/static/js/paypal.js"></script>
     <script src="https://www.paypalobjects.com/api/checkout.js"></script>
 
     <!-- Custom CSS -->
@@ -155,20 +157,18 @@
             alt="..."
           />
           <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">
-              Some quick example text to build on the card title and make up the
-              bulk of the card's content.
-            </p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-            <div class="form-outline mb-4" ">
-              <input
-                v-model="email"
-                type="email"
-                id="typeEmailX-2"
-                placeholder="Student id"
-                class="form-control form-control-lg"
-              />
+            <h5 class="card-title">Paypal</h5>
+            <p class="card-text">Quick and easy pay with PayPal.</p>
+            <div class="row d-flex justify-content-center mt-5">
+              <div class="form-outline mb-4">
+                <input
+                  type="amount"
+                  id="Amount"
+                  placeholder="BAM"
+                  class="form-control form-control-lg"
+                />
+                <div class="text-center pt-3 w-100" id="paypal-button"></div>
+              </div>
             </div>
           </div>
         </div>
@@ -179,7 +179,7 @@
             <strong>Credit Card</strong>
             <!-- <small>enter your card details</small> -->
           </div>
-          <div class="card-body">
+          <div class="card-body card-body d-flex flex-column gap-3">
             <div class="row">
               <div class="col-sm-12 mb-4">
                 <div class="form-group">
@@ -195,16 +195,18 @@
             </div>
 
             <div class="row">
-              <div class="col-sm-12 mb-4">
+              <div class="col-sm-12">
                 <div class="form-group">
                   <label for="ccnumber">Credit Card Number</label>
 
                   <div class="input-group">
                     <input
+                      id="cardnum"
                       class="form-control"
                       type="text"
                       placeholder="0000 0000 0000 0000"
                       autocomplete="email"
+                      onkeydown="checkCard(event)"
                     />
                     <div class="input-group-append">
                       <span class="input-group-text">
@@ -219,6 +221,71 @@
                   </div>
                 </div>
               </div>
+            </div>
+            <div id="trusticons mb-5 d-flex gap-5">
+              <svg
+                width="25px"
+                height="25px"
+                viewBox="0 -9 58 58"
+                fill="none"
+                id="master"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <rect
+                  x="0.5"
+                  y="0.5"
+                  width="25"
+                  height="25"
+                  rx="3.5"
+                  fill="white"
+                  stroke="#F3F3F3"
+                />
+                <path
+                  d="M34.3102 28.9765H23.9591V10.5122H34.3102V28.9765Z"
+                  fill="#FF5F00"
+                />
+                <path
+                  d="M24.6223 19.7429C24.6223 15.9973 26.3891 12.6608 29.1406 10.5107C27.1285 8.93843 24.5892 7.99998 21.8294 7.99998C15.2961 7.99998 10 13.2574 10 19.7429C10 26.2283 15.2961 31.4857 21.8294 31.4857C24.5892 31.4857 27.1285 30.5473 29.1406 28.975C26.3891 26.8249 24.6223 23.4884 24.6223 19.7429"
+                  fill="#EB001B"
+                />
+                <path
+                  d="M48.2706 19.7429C48.2706 26.2283 42.9745 31.4857 36.4412 31.4857C33.6814 31.4857 31.1421 30.5473 29.1293 28.975C31.8815 26.8249 33.6483 23.4884 33.6483 19.7429C33.6483 15.9973 31.8815 12.6608 29.1293 10.5107C31.1421 8.93843 33.6814 7.99998 36.4412 7.99998C42.9745 7.99998 48.2706 13.2574 48.2706 19.7429"
+                  fill="#F79E1B"
+                />
+              </svg>
+
+              <svg
+                viewBox="0 -140 780 780"
+                width="25"
+                height="25"
+                id="visa"
+                enable-background="new 0 0 780 500"
+                version="1.1"
+                xml:space="preserve"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="#000000"
+              >
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g
+                  id="SVGRepo_tracerCarrier"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></g>
+                <g id="SVGRepo_iconCarrier">
+                  <path
+                    d="M40,0h700c22.092,0,40,17.909,40,40v420c0,22.092-17.908,40-40,40H40c-22.091,0-40-17.908-40-40V40 C0,17.909,17.909,0,40,0z"
+                    fill="#0E4595"
+                  ></path>
+                  <path
+                    d="m293.2 348.73l33.361-195.76h53.36l-33.385 195.76h-53.336zm246.11-191.54c-10.57-3.966-27.137-8.222-47.822-8.222-52.725 0-89.865 26.55-90.18 64.603-0.299 28.13 26.514 43.822 46.752 53.186 20.771 9.595 27.752 15.714 27.654 24.283-0.131 13.121-16.586 19.116-31.922 19.116-21.357 0-32.703-2.967-50.227-10.276l-6.876-3.11-7.489 43.823c12.463 5.464 35.51 10.198 59.438 10.443 56.09 0 92.5-26.246 92.916-66.882 0.199-22.269-14.016-39.216-44.801-53.188-18.65-9.055-30.072-15.099-29.951-24.268 0-8.137 9.668-16.839 30.557-16.839 17.449-0.27 30.09 3.535 39.938 7.5l4.781 2.26 7.232-42.429m137.31-4.223h-41.232c-12.773 0-22.332 3.487-27.941 16.234l-79.244 179.4h56.031s9.16-24.123 11.232-29.418c6.125 0 60.555 0.084 68.338 0.084 1.596 6.853 6.49 29.334 6.49 29.334h49.514l-43.188-195.64zm-65.418 126.41c4.412-11.279 21.26-54.723 21.26-54.723-0.316 0.522 4.379-11.334 7.074-18.684l3.605 16.879s10.219 46.729 12.354 56.528h-44.293zm-363.3-126.41l-52.24 133.5-5.567-27.13c-9.725-31.273-40.025-65.155-73.898-82.118l47.766 171.2 56.456-0.064 84.004-195.39h-56.521"
+                    fill="#ffffff"
+                  ></path>
+                  <path
+                    d="m146.92 152.96h-86.041l-0.681 4.073c66.938 16.204 111.23 55.363 129.62 102.41l-18.71-89.96c-3.23-12.395-12.597-16.094-24.186-16.527"
+                    fill="#F2AE14"
+                  ></path>
+                </g>
+              </svg>
             </div>
 
             <div class="row">
@@ -295,13 +362,20 @@
           />
           <div class="card-body">
             <h5 class="card-title">Card title</h5>
-            <p class="card-text">
-              Some quick example text to build on the card title and make up the
-              bulk of the card's content.
-            </p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
+            <p class="card-text">Jos jedan brz nacin uplate</p>
+            <label class="form-label mb-3" for="customFile"
+              >Importuj sliku uplatnice</label
+            >
 
-            
+            <input type="file" class="form-control mt-3" id="customFile" />
+            <div class="d-flex justify-content-center mt-4">
+              <input
+                type="button"
+                value="Upload"
+                class="btn btn-primary"
+                onclick="onUploadHandler()"
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -311,41 +385,20 @@
         <thead>
           <tr>
             <th scope="col">#</th>
-            <th scope="col">Id</th>
-            <th scope="col">Datum</th>
-            <th scope="col">Kolicina</th>
-            <th scope="col">Svrha</th>
+            <th scope="col">Iznos</th>
+            <th scope="col">Svrha uplate</th>
+            <th scope="col">Racun primaoca</th>
           </tr>
         </thead>
         <tbody>
+          {% for slip in paymentSlips %}
           <tr>
-            <th scope="row">1</th>
-            <td>Id</td>
-            <td>Name</td>
-            <td>Amount</td>
-            <td>Purpose</td>
+            <td>{{ slip.id }}</td>
+            <td>{{ slip.kolicinaNovca }}</td>
+            <td>{{ slip.svrhauplate }}</td>
+            <td>{{ slip.racunPrimaoca }}</td>
           </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>Id</td>
-            <td>Name</td>
-            <td>Amount</td>
-            <td>Purpose</td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td>Id</td>
-            <td>Name</td>
-            <td>Amount</td>
-            <td>Purpose</td>
-          </tr>
-          <tr>
-            <th scope="row">4</th>
-            <td>Id</td>
-            <td>Name</td>
-            <td>Amount</td>
-            <td>Purpose</td>
-          </tr>
+          {% endfor %}
         </tbody>
       </table>
     </div>
@@ -356,6 +409,11 @@
   body {
     font-family: "Rubik", sans-serif;
   }
+  #Amount {
+    margin-left: 20%;
+    max-width: 150px;
+  }
+
   .card {
     border-radius: 20;
   }
@@ -385,8 +443,109 @@
 </style>
 
 <script>
-  function onPayHandler() {
-    let amount = prompt("Unesite kolicinu u BAM : ");
-    console.log(amount);
+  $(document).ready(function () {
+    $("#status_toast_close").click(function () {
+      $(".toast").hide();
+    });
+    $("#cardnum").keyup(function () {
+      console.log($(this).val());
+    });
+  });
+
+  function getCookie(cname) {
+    let name = cname + "=";
+    let decodedCookie = decodeURIComponent(document.cookie);
+    let ca = decodedCookie.split(";");
+    for (let i = 0; i < ca.length; i++) {
+      let c = ca[i];
+      while (c.charAt(0) == " ") {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) == 0) {
+        return c.substring(name.length, c.length);
+      }
+    }
+    return "";
+  }
+
+  var CREATE_PAYMENT_URL = "http://192.168.137.80:5000/payment/paypal/create/";
+  var EXECUTE_PAYMENT_URL = "http://192.168.137.80:5000/payment/paypal/execute";
+  paypal.Button.render(
+    {
+      env: "sandbox", // Or 'production'
+      // Set up the payment:
+      // 1. Add a payment callback
+      payment: function (data, actions) {
+        amount = $(`#Amount`).val();
+        // 2. Make a request to your server
+        return actions.request
+          .post(`${CREATE_PAYMENT_URL}${amount}`)
+          .then(function (res) {
+            // 3. Return res.paymentIDswea/+ yujkupo000000+from the response
+            return res.paymentID;
+          });
+      },
+      // Execute the payment:
+      // 1. Add an onAuthorize callback
+      onAuthorize: function (data, actions) {
+        console.log(getCookie("_user_id"));
+        // 2. Make a request to your server
+        return actions.request
+          .post(EXECUTE_PAYMENT_URL, {
+            paymentID: data.paymentID,
+            payerID: data.payerID,
+            _user_id: getCookie("_user_id"),
+          })
+          .then(function (res) {
+            console.log(res.success);
+            // 3. Show the buyer a confirmation message.
+            if (res.success == true) {
+              alert(
+                "Success!",
+                "You've successfully added funds to your account!"
+              );
+            }
+          });
+      },
+    },
+    "#paypal-button"
+  );
+
+  function onUploadHandler() {
+    const fileInput = document.getElementById("customFile");
+    const formData = new FormData();
+    formData.append("image", fileInput);
+    axios
+      .post("http://192.168.137.80:5000/imageUpload", formData)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+  function checkCard(e) {
+    var characters = document.getElementById("cardnum");
+    characters = characters.value.split("");
+
+    var visa = document.getElementById("visa");
+    var master = document.getElementById("master");
+
+    if (characters[0] == 2 || characters[0] == 5) {
+      visa.style.visibility = "hidden";
+      master.style.visibility = "visible";
+    } else if (characters[0] == 4) {
+      visa.style.visibility = "visible";
+      master.style.visibility = "hidden";
+    } else {
+      visa.style.visibility = "hidden";
+      master.style.visibility = "hidden";
+    }
+
+    if (characters.length < 2) {
+      visa.style.visibility = "visible";
+      master.style.visibility = "visible";
+    }
   }
 </script>
