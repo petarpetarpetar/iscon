@@ -1,0 +1,119 @@
+<html lang="sr">
+  <meta charset="UTF-8" />
+  <head>
+    <!-- bootstrap -->
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- jQuery -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- Logout -->
+    <script src="{{ url_for('static', filename='js/login.js') }}"></script>
+  </head>
+  <body>
+    {% include 'navbar.html' %}
+    <div>
+      <section style="background-color: rgb(99, 199, 233)">
+        <div class="container py-5">
+          <div class="row">
+            <div class="col-lg-4">
+              <div class="card mb-4">
+                <div class="card-body text-center">
+                  <img
+                    src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"
+                    alt="avatar"
+                    class="rounded-circle img-fluid"
+                    style="width: 150px"
+                  />
+                  <h5 class="my-3">{{ student.ime }} {{ student.prezime }}</h5>
+                  <p class="text-muted mb-1">{{ student.indeks }}</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-8">
+              <div class="card mb-4">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0">Име</p>
+                    </div>
+                    <div class="col-sm-9">
+                      <p class="text-muted mb-0">{{ student.ime }}</p>
+                    </div>
+                  </div>
+                  <hr />
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0">Презиме</p>
+                    </div>
+                    <div class="col-sm-9">
+                      <p class="text-muted mb-0">{{ student.prezime }}</p>
+                    </div>
+                  </div>
+                  <hr />
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0">ЈМБГ</p>
+                    </div>
+                    <div class="col-sm-9">
+                      <p class="text-muted mb-0">{{ student.jmbg }}</p>
+                    </div>
+                  </div>
+                  <hr />
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0">Емаил</p>
+                    </div>
+                    <div class="col-sm-9">
+                      <p class="text-muted mb-0">{{ student.email }}</p>
+                    </div>
+                  </div>
+                  <hr />
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0">Телефон</p>
+                    </div>
+                    <div class="col-sm-9">
+                      <p class="text-muted mb-0">{{ student.telefon }}</p>
+                    </div>
+                  </div>
+                  <hr />
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0">Адреса</p>
+                    </div>
+                    <div class="col-sm-9">
+                      <p class="text-muted mb-0">{{ student.adresa }}</p>
+                    </div>
+                  </div>
+                  <hr />
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0">Стање на рачуну</p>
+                    </div>
+                    <div class="col-sm-9">
+                      <p class="text-muted mb-0">
+                        {{ student.stanjeNaRacunu }}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>

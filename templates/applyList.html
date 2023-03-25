@@ -1,0 +1,186 @@
+<html lang="sr">
+  <meta charset="UTF-8" />
+  <head>
+    <!-- bootstrap -->
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
+
+    <!-- jQuery -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- Logout -->
+    <script src="{{ url_for('static', filename='js/login.js') }}"></script>
+  </head>
+  <body>
+    {% include 'navbar.html' %}
+
+    <div class="container py-5">
+        <h1><strong>ПРИЈАВНИ СЕМЕСТРАЛНИ ЛИСТ</strong></h1>
+        <form>         
+            <div class="form-group row mx-auto my-3">            
+                <label for="fakultet" class="col-sm-2 col-form-label"> Факултет </label>
+                <div class="col-sm-5">
+                    <input type="text" id="fakultet" class="form-control">  </input>
+                </div>
+            </div>
+            <div class="form-group row mx-auto my-3">
+                <label for="dosije-broj" class="col-sm-3 col-form-label"> Број уписнице (индекса) </label>
+                <div class="col-sm-2">
+                    <input type="text" id="dosije-broj" class="form-control">  </input>
+                </div>
+            </div>
+            <div class="form-group row mx-auto my-3">
+                <div class="inline">
+                    <label for="student" class="col-sm-1 col-form-label"> Студент </label>
+                </div>
+                <div class="col-sm-3 inline">
+                    <input type="text" id="student" class= "form-control">  </input>
+                </div>
+                <div class="inline">
+                    <label>уписао-ла се као</label>
+                </div>
+                <div class="inline">
+                    <select class="form-select px-2 mx-2"aria-label="redovan">
+                        <option>редован</option>
+                        <option>ванредан</option>
+                    </select>
+                </div>
+                <div class="inline">
+                    студент у
+                </div> 
+                <div>
+                    <select class="form-select px-2 mx-2" aria-label="naziv-predmeta2">
+                        <option selected disabled>семестар-године</option>
+                        <option value="1">1.</option>
+                        <option value="2">2.</option>
+                        <option value="3">3.</option>
+                        <option value="4">4.</option>
+                        <option value="5">5.</option>
+                        <option value="6">6.</option>
+                        <option value="7">7.</option>
+                        <option value="8">8.</option>
+                    </select>
+                </div>
+                <div class="inline">
+                    <label> семестар-године </label>
+                </div>
+                <div class="inline mx-2 my-2">
+                    <input type="text" id="smer" class="form-control">  </input>
+                </div>
+                <div class="inline my-2">
+                    одсјек-смјер-група.
+                </div>  
+            </div>
+            <div class="form-group row mx-auto my-3">
+                <label for="datum" class="col-sm-2 col-form-label">Датум рођења</label>
+                <div>
+                <input type="date" id="datum" class="form-control">  </input>
+                </div>
+            </div>
+            <div class="form-group row mx-auto my-3">
+                <div class="col-sm-2 inline">
+                    <label for="mesto-rodjenja" class="col-form-label"> Мјесто рођења </label>
+                </div>
+                <div class="col-sm-2 inline">
+                    <input type="text" id="mjesto" class= "form-control">  </input>
+                </div>
+                <div class="inline">
+                    <label for="opstina" class="col-form-label"> , општина</label>
+                </div>
+                <div class="col-sm-2 inline">
+                    <input type="text" id="opstina" class= "form-control">  </input>
+                </div>
+                <div class="inline">
+                    <label for="drzava" class="col-form-label"> , држава</label>
+                </div>
+                <div class="col-sm-2 inline">
+                    <input type="text" id="drzava" class= "form-control">  </input>
+                </div>
+            </div>
+            <div class="form-group row mx-auto my-3">
+                <div class="col-sm-2 inline">
+                    <label for="drzavljanstvo" class="col-form-label"> Држављанство </label>
+                </div>
+                <div class="col-sm-2 inline">
+                    <input type="text" id="drzavljanstvo" class= "form-control">  </input>
+                </div>
+            </div>
+            <div class="form-group row mx-auto my-3">
+                <div class="col-sm-2 inline">
+                    <label for="narodnost" class="col-form-label"> Народност </label>
+                </div>
+                <div class="col-sm-2 inline">
+                    <input type="text" id="narodnost" class= "form-control">  </input>
+                </div>
+                <div class="inline">
+                    <label for="bracno-stanje" class="col-form-label"> , брачно стање</label>
+                </div>
+                <div class="col-sm-2 inline">
+                    <input type="text" id="bracno-stanje" class= "form-control">  </input>
+                </div>
+            </div>
+            <div class="form-group row mx-auto my-3">
+                <div class="col-sm-3 inline">
+                    <label for="prezime-i-ime-roditelja" class="col-form-label"> Презиме и име родитеља </label>
+                </div>
+                <div class="col-sm-9 inline">
+                    <input type="text" id="prezime-i-ime-roditelja" class= "form-control">  </input>
+                </div>
+            </div>
+            <div class="form-group row mx-auto my-3">
+                <div class="col-sm-6">
+                    <label for="kod-koga-stanuje" class="col-form-label"> Код кога станује (код породице или као самац) за вријеме студија</label>
+                </div>
+                <div class="col-sm-12">
+                    <input type="text" id="kod-koga-stanuje" class= "form-control">  </input>
+                </div>
+            </div>
+            <div class="form-group row mx-auto my-3">
+                <div class="col-sm-6">
+                    <label for="gdje-stanuje" class="col-form-label"> Гдје станује за вријеме студија: улица, број и општина</label>
+                </div>
+                <div class="col-sm-12">
+                    <input type="text" id="gdje-stanuje" class= "form-control">  </input>
+                </div>
+            </div>
+            <div class="form-group row mx-auto my-3">
+                <div class="col-sm-3 inline">
+                    <label for="stlno-mesto" class="col-form-label"> Стално мјесто боравка студента </label>
+                </div>
+                <div class="col-sm-9 inline">
+                    <input type="text" id="stalno-mesto" class= "form-control">  </input>
+                </div>
+            </div>
+            <div class="form-group row mx-auto my-3">
+                <div class="col-sm-6">
+                    <label for="izdrzavanje" class="col-form-label"> Од чега се издржава за вријеме студија</label>
+                </div>
+                <div class="col-sm-12">
+                    <textarea type="text" id="izdrzavanje" class= "form-control" rows="3">  </textarea>
+                </div>
+            </div>
+            <div class="form-group row mx-auto my-3">
+                <div class="col-sm-6">
+                    <label for="stipendija" class="col-form-label"> Прима ли стипендију и од кога </label>
+                </div>
+                <div class="col-sm-12">
+                    <textarea type="text" id="stipendija" class= "form-control" rows="2">  </textarea>
+                </div>
+            </div>
+            <div class="form-group row mx-auto my-3">
+                <div class="col-sm-3 inline">
+                    <label for="overeni-semestri" class="col-form-label"> Колико има признатих семестара </label>
+                </div>
+                <div class="col-sm-9 inline">
+                    <input type="text" id="overeni-semestri" class= "form-control">  </input>
+                </div>
+            </div>
+            <submit>
+            <div style="text-align: right">
+                    <button type="submit" class="btn btn-primary my-2">Следећи лист</button>
+            </div>
+        </form>
+    </div>
+  </body>
+</html>

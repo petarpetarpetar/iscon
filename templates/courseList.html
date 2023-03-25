@@ -1,0 +1,316 @@
+<html lang="sr">
+<meta charset="UTF-8">
+    <head>
+        <!-- bootstrap -->
+
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
+
+        <!-- jQuery -->
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+        <!-- Logout -->
+        <script src="{{ url_for('static', filename='js/login.js') }}"></script>
+
+        <!-- Smart select -->
+        <script src="{{ url_for('static', filename='js/smartselect.js') }}"></script>
+
+        <!-- Smart select -->
+        <script src="{{ url_for('static', filename='js/courseList.js') }}"></script>
+
+    </head>
+    <body>
+    {% include 'navbar.html' %}
+    <div class="container py-5">
+        <h1> <strong> ПРИЈАВНИ СЕМЕСТРАЛНИ ЛИСТ ЗА ЉЕТЊИ СЕМЕСТАР АК. 2022/23. ГОДИНЕ</strong> </h1>
+        <form>
+            <div class="form-group row mx-auto my-3">
+                <label for="broj-upisnice" class="col-sm-3 col-form-label"> Број уписнице (индекса) </label>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control" value="{{ student.indeks }}" id="broj-upisnice"></input>
+                </div>
+            </div>
+            <div class="form-group row mx-auto my-3">
+                <label for="semestar-godina" class="col-sm-2 col-form-label"> Семестар - година </label>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control" value="{{ student.godina }}" id="semestar-godina"> </input> 
+                </div>
+            </div>
+            <div class="form-group row mx-auto my-3">          
+                <label for="studijski-program" class="col-sm-2 col-form-label"> Студијски програм </label>
+                <div class="col-sm-5">
+                    <input type="text" class="form-control" value="{{ student.studijskiProgram }}" id="studijski-program"> </input>
+                </div>
+            </div>
+            <div class="form-group row mx-auto my-3">
+                <label for="smjer" class="col-sm-2 col-form-label"> Смјер </label>
+                <div class="col-sm-5">
+                    <input type="text" class="form-control" value="{{ student.smer }}" id="smjer"> </input>
+            
+                </div>
+            </div>
+            <div class="form-group row mx-auto my-3">
+                <label for="student" class="col-sm-2 col-form-label"> Студент </label>
+                <div class="col-sm-5">
+                    <input type="text" id="student" value="{{student.prezime}} {{student.ime}}" class="form-control"> </input>
+                </div>
+            </div>
+            <div class="form-group row mx-auto my-3">
+            <h4> <strong> Списак предмета које студент <u> први пут слуша </u> у летњем семестру ак. 2022/23. </strong> </h4>
+            </div>
+            <table style="text-align: center;" class="table table-striped">
+                <thead style="background-color: hsl(205, 78%, 56%)">
+                    <tr>
+                        <th scope="col">Редни број</th>
+                        <th scope="col">Семестар</th>
+                        <th scope="col">Назив предмета</th>
+                        <th scope="col">Шифра предмета</th>
+                        <th scope="col">О/И</th>
+                        <th scope="col">ECTS бодови</th>
+                    </tr>
+                </thead>
+                <tr>
+                    <th scope="row">1.</th>
+                    <td>
+                        <select id="semestar-select-1" class="form-select px-2" aria-label="semestar-1">
+                            <option selected disabled>Изаберите семестар</option>
+                            <option value="3">3.</option>
+                            <option value="4">4.</option>
+                          </select>
+                    </td>
+                    <td>
+                        <select id="predmet-select-1" class=" form-select px-2" aria-label="naziv-predmeta-1">
+                            <option selected disabled>Изаберите предмет</option>
+                            {% for key,value in temp.items() %}
+                            <option value="1" semestar="{{value[0]}}" ects="{{value[1]}}" obavezan="{{value[3]}}">{{ key }}</option>
+
+                            {% endfor %}
+                          </select>
+                    </td>
+                    <td><input type="text" name="sifra-predmeta-1"></td>
+                    <td>
+                        <select id="oi-select-1" class="form-select px-2" aria-label="oi-1">
+                            <option selected disabled>обавезан/изборни</option>
+                            <option value="O">обавезан</option>
+                            <option value="I">изборни</option>
+                          </select>
+                    </td>
+                    <td id="ects-bodovi-1">0</td>
+                </tr>
+                 <tr>
+                    <th scope="row">2.</th>
+                    <td>
+                        <select id="semestar-select-2" class="form-select px-2" aria-label="semestar-2">
+                            <option selected disabled>Изаберите семестар</option>
+                            <option value="3">3.</option>
+                            <option value="3">4.</option>
+                          </select>
+                    </td>
+                    <td>
+                        <select id="predmet-select-2" class="form-select px-2" aria-label="naziv-predmeta-3">
+                            <option selected disabled>Изаберите предмет</option>
+                            {% for key,value in temp.items() %}
+                            <option value="1" semestar="{{value[0]}}" ects="{{value[1]}}" obavezan="{{value[3]}}">{{ key }}</option>
+
+                            {% endfor %}
+                          </select>
+                    </td>
+                    <td><input type="text" name="sifra-predmeta1"></td>
+                    <td>
+                        <select id="oi-select-2" class="form-select px-2" aria-label="oi-2">
+                            <option selected disabled>обавезан/изборни</option>
+                            <option value="O">обавезан</option>
+                            <option value="I">изборни</option>
+                          </select>
+                    </td>
+                    <td id="ects-bodovi-2">0</td>
+                </tr>
+                 <tr>
+                    <th scope="row">3.</th>
+                    <td>
+                        <select id="semestar-select-3" class="form-select px-2"aria-label="semestar-3">
+                            <option selected disabled>Изаберите семестар</option>
+                            <option value="3">3.</option>
+                            <option value="4">4.</option>
+                          </select>
+                    </td>
+                    <td>
+                        <select id="predmet-select-3" class="form-select px-2" aria-label="naziv-predmeta-3">
+                            <option selected disabled>Изаберите предмет</option>
+                            {% for key,value in temp.items() %}
+                            <option value="1" semestar="{{value[0]}}" ects="{{value[1]}}" obavezan="{{value[3]}}">{{ key }}</option>
+
+                            {% endfor %}
+                          </select>
+                    </td>
+                    <td><input type="text" name="sifra-predmeta-3"></td>
+                    <td>
+                        <select id="oi-select-3" class="form-select px-2" aria-label="oi-3">
+                            <option selected disabled>обавезан/изборни</option>
+                            <option value="O">обавезан</option>
+                            <option value="I">изборни</option>
+                          </select>
+                    </td>
+                    <td id="ects-bodovi-3">0</td>
+                </tr>
+                 <tr>
+                    <th scope="row">4.</th>
+                    <td>
+                        <select id="semestar-select-4" class="form-select px-2"aria-label="semestar-4">
+                            <option selected disabled>Изаберите семестар</option>
+                            <option value="3">3.</option>
+                            <option value="4">4.</option>
+                          </select>
+                    </td>
+                    <td>
+                        <select id="predmet-select-4" class="form-select px-2" aria-label="naziv-predmeta-4">
+                            <option selected disabled>Изаберите предмет</option>
+                            {% for key,value in temp.items() %}
+                            <option value="1" semestar="{{value[0]}}" ects="{{value[1]}}" obavezan="{{value[3]}}">{{ key }}</option>
+
+                            {% endfor %}
+                          </select>
+                    </td>
+                    <td><input type="text" name="sifra-predmeta-4"></td>
+                    <td>
+                        <select id="oi-select-4" class="form-select px-2" aria-label="oi-4">
+                            <option selected disabled>обавезан/изборни</option>
+                            <option value="O">обавезан</option>
+                            <option value="I">изборни</option>
+                          </select>
+                    </td>
+                    <td id="ects-bodovi-4">0</td>
+                </tr>
+                <tr>
+                    <th scope="row">5.</th>
+                    <td>
+                        <select id="semestar-select-5" class="form-select px-2"aria-label="semestar-5">
+                            <option selected disabled>Изаберите семестар</option>
+
+                            <option value="3">3.</option>
+                            <option value="3">4.</option>
+                          </select>
+                    </td>
+                    <td>
+                        <select id="predmet-select-5" class="form-select px-2" aria-label="naziv-predmeta-5">
+                            <option selected disabled>Изаберите предмет</option>
+                            {% for key,value in temp.items() %}
+                            <option value="1" semestar="{{value[0]}}" ects="{{value[1]}}" obavezan="{{value[3]}}">{{ key }}</option>
+
+                            {% endfor %}
+                          </select>
+                    </td>
+                    <td><input type="text" name="sifra-predmeta-5"></td>
+                    <td>
+                        <select id="oi-select-5" class="form-select px-2" aria-label="oi-5">
+                            <option selected disabled>обавезан/изборни</option>
+                            <option value="O">обавезан</option>
+                            <option value="I">изборни</option>
+                          </select>
+                    </td>
+                    <td id="ects-bodovi-5">0</td>
+                <tr>
+                    <th scope="row">6.</th>
+                    <td>
+                        <select id="semestar-select-6" class="form-select px-2"aria-label="semestar-6">
+                            <option selected disabled>Изаберите семестар</option>
+                            <option value="3">3.</option>
+                            <option value="4">4.</option>
+                          </select>
+                    </td>
+                    <td>
+                        <select id="predmet-select-6" class="form-select px-2" aria-label="naziv-predmeta-6">
+                            <option selected disabled>Изаберите предмет</option>
+                            {% for key,value in temp.items() %}
+                            <option value="1" semestar="{{value[0]}}" ects="{{value[1]}}" obavezan="{{value[3]}}">{{ key }}</option>
+
+                            {% endfor %}
+                          </select>
+                    </td>
+                    <td><input type="text" name="sifra-predmeta-6"></td>
+                    <td>
+                        <select id="oi-select-6" class="form-select px-2" aria-label="oi-6">
+                            <option selected disabled>обавезан/изборни</option>
+                            <option value="O">обавезан</option>
+                            <option value="I">изборни</option>
+                          </select>
+                    </td>
+                    <td id="ects-bodovi-6">0</td>
+                </tr>
+                <tr>
+                    <th scope="row">7.</th>
+                    <td>
+                        <select id="semestar-select-7" class="form-select px-2"aria-label="semestar-7">
+                            <option selected disabled>Изаберите семестар</option>
+                            <option value="3">3.</option>
+                            <option value="4">4.</option>
+                          </select>
+                    </td>
+                    <td>
+                        <select id="predmet-select-7" class="form-select px-2" aria-label="naziv-predmeta-7">
+                            <option selected disabled>Изаберите предмет</option>
+                            {% for key,value in temp.items() %}
+                            <option value="1" semestar="{{value[0]}}" ects="{{value[1]}}" obavezan="{{value[3]}}">{{ key }}</option>
+
+                            {% endfor %}
+                          </select>
+                    </td>
+                    <td><input type="text" name="sifra-predmeta-7"></td>
+                    <td>
+                        <select id="oi-select-7" class="form-select px-2" aria-label="oi-7">
+                            <option selected disabled>обавезан/изборни</option>
+                            <option value="O">обавезан</option>
+                            <option value="I">изборни</option>
+                          </select>
+                    </td>
+                    <td id="ects-bodovi-7">0</td>
+                </tr>
+                <tr>
+                    <th scope="row">8.</th>
+                    <td>
+                        <select id="semestar-select-8" class="form-select px-2"aria-label="semestar-8">
+                            <option selected disabled>Изаберите семестар</option>
+                            <option value="3">3.</option>
+                            <option value="4">4.</option>
+                          </select>
+                    </td>
+                    <td>
+                        <select id="predmet-select-8" class="form-select px-2" aria-label="naziv-predmeta-8">
+                            <option selected disabled>Изаберите предмет</option>
+                            {% for key,value in temp.items() %}
+                            <option value="1" semestar="{{value[0]}}" ects="{{value[1]}}" obavezan="{{value[3]}}">{{ key }}</option>
+
+                            {% endfor %}
+                          </select>
+                    </td>
+                    <td><input type="text" name="sifra-predmeta-8"></td>
+                    <td>
+                        <select id="oi-select-8" class="form-select px-2" aria-label="oi8">
+                            <option selected disabled>обавезан/изборни</option>
+                            <option value="O">обавезан</option>
+                            <option value="I">изборни</option>
+                          </select>
+                    </td>
+                    <td id="ects-bodovi-8">0</td>
+                </tr>
+                <tr>
+                    <th scope="row"></th>
+                    <td>
+                        
+                    </td>
+                    <td>
+
+                    </td>
+                    <td></td>
+                    <td>Ukupno:</td>
+                    <td id="ects-ukupno">0</td>
+                </tr>
+              </table>
+              <div style="text-align: right">
+                <div id="btn_save_page1" onlick="save_page1()" class="btn btn-primary my-2">Следећи лист</div>
+              </div>
+        </form>
+    </div>
+    </body>
+</html>

@@ -1,0 +1,252 @@
+<html lang="sr">
+<meta charset="UTF-8">
+    <head>
+          <!-- bootstrap -->
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
+
+    <!-- jQuery -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- Logout -->
+    <script src="{{ url_for('static', filename='js/login.js') }}"></script>
+    </head>
+    <body>
+        {% include 'navbar.html' %}
+        <div class="container py-5">
+        <h1> СЕМЕСТРАЛНИ ЛИСТ </h1>
+        <form>         
+            <div class="form-group row mx-auto my-3">            
+                <label for="fakultet" class="col-sm-2 col-form-label"> Факултет </label>
+                <div class="col-sm-5">
+                    <input type="text" id="fakultet" class="form-control">  </input>
+                </div>
+            </div>
+            <div class="form-group row mx-auto my-3">
+                <label for="dosije-broj" class="col-sm-2 col-form-label"> Досије број </label>
+                <div class="col-sm-2">
+                    <input type="text" id="dosije-broj" class="form-control">  </input>
+                </div>
+            </div>
+            <div class="form-group row mx-auto my-3">
+                <label for="semestar-godina" class="col-sm-2 col-form-label"> Семестар - година </label>
+                <div class="col-sm-3">
+                    <input type="text" id="semestar-godina" class="form-control"> </input>
+                </div>
+            </div>
+            <div class="form-group row mx-auto my-3">   
+                <label for="ime-i-prezime-studenta" class="col-sm-2 col-form-label"> Име и презиме студента </label>
+                <div class="col-sm-5">
+                    <input type="text" id="ime-i-prezime-studenta" class="form-control">  </input>
+                </div>
+            </div>
+            <div class="form-group row mx-auto my-3">          
+                <label for="datum-rodjena" class="col-sm-2 col-form-label"> Датум рођења</label>
+                <div class="col-sm-4">
+                    <input type="date" id="datum-rodjena" class="form-control"> </input>
+                </div>
+            </div>
+            <div class="form-group row mx-auto my-3">
+                <label for="opstina" class="col-sm-2 col-form-label"> Општина </label>
+                <div class="col-sm-2">
+                    <input type="text" id="opstina" class="form-control"> </input>
+                </div>
+            </div>
+            <div class="form-group row mx-auto my-3">
+                <label for="drzava" class="col-sm-2 col-form-label" class="form-control"> Држава </label>
+                <div class="col-sm-2">
+                    <input type="text" id="drzava" class="form-control"> </input>
+                </div>
+            </div>
+            <div class="form-group row mx-auto my-3">
+                <label for="drzavljanin" class="col-sm-2 col-form-label" class="form-control"> Држављанин </label>
+                <div class="col-sm-2">
+                    <input type="text" id="drzavljanin" class="form-control"> </input>
+                </div>
+            </div>
+            <div class="form-group row mx-auto my-3">
+                <label for="ocevo-zanimanje" class="col-sm-2 col-form-label" class="form-control"> Очево занимање </label>
+                <div class="col-sm-2">
+                <input type="text" id="ocevo-zanimanje" class="form-control"> </input>
+                </div>
+            </div>
+            <div class="form-group row mx-auto my-3">
+                <label for="godina-semestra-1"> Слушао је у зимском - љетњем семестру 20</label>
+                <div class="col-sm-1 inline">
+                    <input type="text" id="godina-semestra-1" class="form-control"> </input>
+                </div>
+                <div class="inline">
+                    <label for="godina-semestra-2">/</label>
+                </div>
+                <div class="col-sm-1 inline">
+                    <input type="text" id="godina-semestra-2" class="form-control"> </input> 
+                </div>
+                <label> школске године као </label>
+                <select class="form-select px-2 mx-2"aria-label="redovan">
+                    <option>редован</option>
+                    <option>ванредан</option>
+                </select>
+                <label> студент. </label>
+            </div>
+            <table  style="text-align: center;" class="table table-striped">
+                <thead style="background-color: hsl(205, 78%, 56%)">
+                    <tr>
+                        <th scope="col">Назив предмета</th>
+                        <th scope="col">Име и презиме наставника</th>
+                        <th scope="col">Број недељних часова</th>
+                        <th scope="col">Примједба</th>
+                    </tr>
+                </thead>
+                <tr>
+                    <td>
+                        <select id="predmet-select-1" class="form-select px-2" aria-label="naziv-predmeta1">
+                            <option selected>Изаберите предмет</option>
+                            <option value="1">1.</option>
+                            <option value="2">2.</option>
+                            <option value="3">3.</option>
+                            <option value="4">4.</option>
+                            <option value="5">5.</option>
+                            <option value="6">6.</option>
+                            <option value="7">7.</option>
+                            <option value="8">8.</option>
+                        </select>
+                    </td>
+                    <td><input type="text" name="ime-i-prezime-nastavnika1"></td>
+                    <td><input type="text" name="broj-nedeljnih-casova1"></td>
+                    <td><input type="text" name="primjedba1"></td>
+                </tr>
+                <tr>
+                    <td>
+                        <select id="predmet-select-2" class="form-select px-2" aria-label="naziv-predmeta2">
+                            <option selected>Изаберите предмет</option>
+                            <option value="1">1.</option>
+                            <option value="2">2.</option>
+                            <option value="3">3.</option>
+                            <option value="4">4.</option>
+                            <option value="5">5.</option>
+                            <option value="6">6.</option>
+                            <option value="7">7.</option>
+                            <option value="8">8.</option>
+                        </select>
+                    </td>
+                    <td><input type="text" name="ime-i-prezime-nastavnika2"></td>
+                    <td><input type="text" name="broj-nedeljnih-casova2"></td>
+                    <td><input type="text" name="primjedba2"></td>
+                </tr>
+                <tr>
+                    <td>
+                        <select id="predmet-select-3" class="form-select px-2" aria-label="naziv-predmeta3">
+                            <option selected>Изаберите предмет</option>
+                            <option value="1">1.</option>
+                            <option value="2">2.</option>
+                            <option value="3">3.</option>
+                            <option value="4">4.</option>
+                            <option value="5">5.</option>
+                            <option value="6">6.</option>
+                            <option value="7">7.</option>
+                            <option value="8">8.</option>
+                        </select>
+                    </td>
+                    <td><input type="text" name="ime-i-prezime-nastavnika3"></td>
+                    <td><input type="text" name="broj-nedeljnih-casova3"></td>
+                    <td><input type="text" name="primjedba3"></td>
+                </tr>
+                <tr>
+                    <td>
+                        <select id="predmet-select-4" class="form-select px-2" aria-label="naziv-predmeta4">
+                            <option selected>Изаберите предмет</option>
+                            <option value="1">1.</option>
+                            <option value="2">2.</option>
+                            <option value="3">3.</option>
+                            <option value="4">4.</option>
+                            <option value="5">5.</option>
+                            <option value="6">6.</option>
+                            <option value="7">7.</option>
+                            <option value="8">8.</option>
+                        </select>
+                    </td>
+                    <td><input type="text" name="ime-i-prezime-nastavnika4"></td>
+                    <td><input type="text" name="broj-nedeljnih-casova4"></td>
+                    <td><input type="text" name="primjedba4"></td>
+                </tr>
+                <tr>
+                    <td>
+                        <select id="predmet-select-5" class="form-select px-2" aria-label="naziv-predmeta5">
+                            <option selected>Изаберите предмет</option>
+                            <option value="1">1.</option>
+                            <option value="2">2.</option>
+                            <option value="3">3.</option>
+                            <option value="4">4.</option>
+                            <option value="5">5.</option>
+                            <option value="6">6.</option>
+                            <option value="7">7.</option>
+                            <option value="8">8.</option>
+                        </select>
+                    </td>
+                    <td><input type="text" name="ime-i-prezime-nastavnika5"></td>
+                    <td><input type="text" name="broj-nedeljnih-casova5"></td>
+                    <td><input type="text" name="primjedba5"></td>
+                </tr>
+                <tr>
+                    <td>
+                        <select id="predmet-select-6" class="form-select px-2" aria-label="naziv-predmeta6">
+                            <option selected>Изаберите предмет</option>
+                            <option value="1">1.</option>
+                            <option value="2">2.</option>
+                            <option value="3">3.</option>
+                            <option value="4">4.</option>
+                            <option value="5">5.</option>
+                            <option value="6">6.</option>
+                            <option value="7">7.</option>
+                            <option value="8">8.</option>
+                        </select>
+                    </td>
+                    <td><input type="text" name="ime-i-prezime-nastavnika6"></td>
+                    <td><input type="text" name="broj-nedeljnih-casova6"></td>
+                    <td><input type="text" name="primjedba6"></td>
+                </tr>
+                <tr>
+                    <td>
+                        <select id="predmet-select-7" class="form-select px-2" aria-label="naziv-predmeta7">
+                            <option selected>Изаберите предмет</option>
+                            <option value="1">1.</option>
+                            <option value="2">2.</option>
+                            <option value="3">3.</option>
+                            <option value="4">4.</option>
+                            <option value="5">5.</option>
+                            <option value="6">6.</option>
+                            <option value="7">7.</option>
+                            <option value="8">8.</option>
+                        </select>
+                    </td>
+                    <td><input type="text" name="ime-i-prezime-nastavnika7"></td>
+                    <td><input type="text" name="broj-nedeljnih-casova7"></td>
+                    <td><input type="text" name="primjedba7"></td>
+                </tr>
+                <tr>
+                    <td>
+                        <select id="predmet-select-8" class="form-select px-2" aria-label="naziv-predmeta8">
+                            <option selected>Изаберите предмет</option>
+                            <option value="1">1.</option>
+                            <option value="2">2.</option>
+                            <option value="3">3.</option>
+                            <option value="4">4.</option>
+                            <option value="5">5.</option>
+                            <option value="6">6.</option>
+                            <option value="7">7.</option>
+                            <option value="8">8.</option>
+                        </select>
+                    </td>
+                    <td><input type="text" name="ime-i-prezime-nastavnika7"></td>
+                    <td><input type="text" name="broj-nedeljnih-casova7"></td>
+                    <td><input type="text" name="primjedba7"></td>
+                </tr>
+              </table>
+              <div style="text-align: right">
+                <button type="submit" class="btn btn-primary my-2">Следећи лист</button>
+              </div>
+        </form>
+    </div>
+    </body>
+</html>
